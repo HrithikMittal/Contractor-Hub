@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: #16181d;
+  --color-muted: #6b7079;
+  --color-line: #e6e3dd;
+  --color-paper: #faf9f6;
+  --color-accent: #0f6e5c;
+  --color-accent-soft: #e3f1ed;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-white;
+  }
+  .label {
+    @apply mb-1 block text-xs font-medium text-muted;
+  }
+  .input {
+    @apply w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink outline-none transition
+      placeholder:text-zinc-400 focus:border-accent focus:ring-2 focus:ring-accent/15;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition
+      disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 bg-accent text-white hover:bg-[#0b5a4b];
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 border border-line bg-white text-ink hover:bg-zinc-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 text-muted hover:bg-zinc-100 hover:text-ink;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 border border-red-200 bg-white text-red-700 hover:bg-red-50;
+  }
+  .th {
+    @apply px-4 py-2.5 text-left text-xs font-medium tracking-wide text-muted uppercase;
+  }
+  .td {
+    @apply px-4 py-3 text-sm;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .print-plain {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
 }
